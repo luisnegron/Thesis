@@ -7,9 +7,9 @@
 
 Welcome to my repository! Here you will find all the essential files for my degree thesis in Systems Engineering, carried out at the "Universidad Nacional de Loja". Immerse yourself in the world of my research as we explore together the challenges and discoveries in this exciting field. Join me on this journey towards knowledge and innovation!
 
-Title of the project: "Development of a teacher evaluation platform for the "Miguel Riofrio" public school in the city of Loja"
+- **Title of the project:** "Development of a teacher evaluation platform for the "Miguel Riofrio" public school in the city of Loja"
 
-Description: This project focuses on the creation of a comprehensive teacher evaluation platform tailored specifically for the "Miguel Riofrio" public school in Loja. The platform aims to streamline and enhance the evaluation process, providing valuable insights for the school's administration to improve teaching quality and student outcomes.
+- **Description:** This project focuses on the creation of a comprehensive teacher evaluation platform tailored specifically for the "Miguel Riofrio" public school in Loja. The platform aims to streamline and enhance the evaluation process, providing valuable insights for the school's administration to improve teaching quality and student outcomes.
 
 ## Repository Contents
 
@@ -28,7 +28,8 @@ Description: This project focuses on the creation of a comprehensive teacher eva
 
 ### Code
 
-
+- **Backend:** Our server is stored in this folder
+- **Frontend:** The visual part of the project is stored in this folder.
 
 ### Resources
 
