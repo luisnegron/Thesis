@@ -1,7 +1,7 @@
 # Thesis
 # Welcome to my Thesis Repository! 🎓
 
-![Thesis Image](thesis_image.jpg)
+![Thesis Image](https://raw.githubusercontent.com/luisnegron/Thesis/main/4.resources/1.images/readme_img/thesis_img.jpg)
 
 ## About
 
