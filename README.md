@@ -46,7 +46,7 @@ Welcome to my repository! Here you will find all the essential files for my degr
 ## How to Use
 
 1. **Clone the Repository:**
-git clone https://github.com/your-username/thesis-repo.git
+git clone https://github.com/luisnegron/thesis-repo.git
 
 2. **Navigate to Specific Sections:**
 cd Thesis
