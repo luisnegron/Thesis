@@ -46,6 +46,7 @@ Welcome to my repository! Here you will find all the essential files for my degr
 
 - **Experiments:** If you conduct experiments or tests during your research, you can document them here.
 - **Correspondence:** Stores emails, notes, or any other correspondence related to your research.
+- **Graduation procedures:** Contains essential documents for completing the requirements to obtain a degree in systems engineering. It includes forms, applications, and proofs needed for the graduation process.
 - **License and User Agreement:** Includes license files and any agreements related to the use of your work.
 
 ## How to Use
