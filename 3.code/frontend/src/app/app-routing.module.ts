@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentComponent } from './components/student/student.component';
 import { LoginComponent } from './components/login/login.component';
+import { ListUsersComponent } from './components/list-users/list-users.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'student', component: StudentComponent},
+  {path: 'list-users', component: ListUsersComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
