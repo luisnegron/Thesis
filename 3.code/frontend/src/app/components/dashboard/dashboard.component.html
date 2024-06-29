@@ -1,0 +1,56 @@
+<!-- src/app/components/dashboard/dashboard.component.html -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    <i class="fas fa-home"></i> Inicio
+  </a>
+  <div class="collapse navbar-collapse justify-content-end">
+    <span class="navbar-text text-white">
+      Gestión de {{ currentModule }}
+    </span>
+  </div>
+  <div class="collapse navbar-collapse justify-content-end">
+    <button class="btn btn-outline-light" (click)="logout()">Cerrar Sesión</button>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Menú Lateral -->
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link text-center" [routerLink]="['/dashboard/students']" (click)="setCurrentModule('Estudiantes')">
+              Estudiantes
+            </a>
+          </li>
+          <li class="nav-item" *ngFor="let module of modules">
+            <a class="nav-link" [routerLink]="module.route" routerLinkActive="active" (click)="setCurrentModule(module.name)">
+              {{ module.name }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+    <!-- Contenido Principal -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <!--<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Gestión de {{ currentModule }}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar">
+            <button class="btn btn-primary" type="button">Buscar</button>
+            <button class="btn btn-success ms-2" type="button">Crear</button>
+          </div>
+        </div>
+      </div>-->
+
+      
+
+      <!-- Otros módulos -->
+      <!-- Reemplaza 'Gestión de Usuarios' con el nombre adecuado para cada módulo -->
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

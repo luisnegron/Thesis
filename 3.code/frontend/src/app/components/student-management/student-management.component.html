@@ -1,0 +1,108 @@
+<!-- src/app/components/student-management/student-management.component.html -->
+<div class="container mt-5">
+ 
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="input-group w-50">
+      <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="searchText">
+      <button class="btn btn-primary" (click)="searchStudent()">Buscar</button>
+    </div>
+    <button class="btn btn-success" (click)="openCreateModal()">Crear Estudiante</button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nro</th>
+        <th>Cédula</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Correo Electrónico</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.nro }}</td>
+        <td>{{ student.cedula }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.apellido }}</td>
+        <td>{{ student.email }}</td>
+        <td>
+          <button class="btn btn-info btn-sm" (click)="viewStudent(student._id)">Ver</button>
+          <button class="btn btn-warning btn-sm" (click)="openEditModal(student)">Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteStudent(student._id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal para Crear/Editar Estudiante -->
+  <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" style="display: block;" *ngIf="showModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ isEditMode ? 'Editar Estudiante' : 'Crear Estudiante' }}</h5>
+          <button type="button" class="close" (click)="closeModal()">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="isEditMode ? updateStudent() : createStudent()">
+            <div class="form-group">
+              <label for="cedula">Cédula</label>
+              <input type="text" class="form-control" id="cedula" [(ngModel)]="currentStudent.cedula" name="cedula" required>
+            </div>
+            <div class="form-group">
+              <label for="name">Nombre</label>
+              <input type="text" class="form-control" id="name" [(ngModel)]="currentStudent.name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="apellido">Apellido</label>
+              <input type="text" class="form-control" id="apellido" [(ngModel)]="currentStudent.apellido" name="apellido" required>
+            </div>
+            <div class="form-group">
+              <label for="direccion">Dirección</label>
+              <input type="text" class="form-control" id="direccion" [(ngModel)]="currentStudent.direccion" name="direccion" required>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="text" class="form-control" id="telefono" [(ngModel)]="currentStudent.telefono" name="telefono" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Correo Electrónico</label>
+              <input type="email" class="form-control" id="email" [(ngModel)]="currentStudent.email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="grado">Grado</label>
+              <input type="text" class="form-control" id="grado" [(ngModel)]="currentStudent.grado" name="grado" required>
+            </div>
+            <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Ver Estudiante -->
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showViewModal}" style="display: block;" *ngIf="showViewModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ver Estudiante</h5>
+        <button type="button" class="close" (click)="closeViewModal()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Nro:</strong> {{ currentStudent.nro }}</p>
+        <p><strong>Cédula:</strong> {{ currentStudent.cedula }}</p>
+        <p><strong>Nombre:</strong> {{ currentStudent.name }}</p>
+        <p><strong>Apellido:</strong> {{ currentStudent.apellido }}</p>
+        <p><strong>Dirección:</strong> {{ currentStudent.direccion }}</p>
+        <p><strong>Teléfono:</strong> {{ currentStudent.telefono }}</p>
+        <p><strong>Correo Electrónico:</strong> {{ currentStudent.email }}</p>
+        <p><strong>Grado:</strong> {{ currentStudent.grado }}</p>
+      </div>
+    </div>
+  </div>
+</div>

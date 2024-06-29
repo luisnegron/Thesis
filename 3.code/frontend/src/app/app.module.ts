@@ -3,22 +3,33 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StudentComponent } from './components/student/student.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { StudentHomeComponent } from './components/student-home/student-home.component';
+import { TeacherHomeComponent } from './components/teacher-home/teacher-home.component';
+import { StudentManagementComponent } from './components/student-management/student-management.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentComponent,
     LoginComponent,
     RegisterComponent,
-    ListUsersComponent
+    ListUsersComponent,
+    DashboardComponent,
+    StudentHomeComponent,
+    TeacherHomeComponent,
+    StudentManagementComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

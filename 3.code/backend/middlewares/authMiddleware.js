@@ -1,15 +1,17 @@
 // middlewares/authMiddleware.js
+
 const jwt = require('jsonwebtoken');
 
 function verificarToken(req, res, next) {
-  const token = req.header('Authorization');
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
     return res.status(401).json({ mensaje: 'Acceso denegado. Token de autorización no proporcionado' });
   }
 
   try {
-    const decoded = jwt.verify(token.split(' ')[1], 'secreto');
+    const decoded = jwt.verify(token, 'secreto');
     req.user = decoded.user;
     next();
   } catch (error) {
@@ -19,16 +21,16 @@ function verificarToken(req, res, next) {
 }
 
 function verificarRol(rolesPermitidos) {
-    return function (req, res, next) {
-      const user = req.user;
-  
-      if (!user || !rolesPermitidos.includes(user.role)) {
-        return res.status(403).json({ mensaje: 'Acceso denegado. No tienes permiso para acceder a esta ruta' });
-      }
-  
-      next();
-    };
-  }
+  return function (req, res, next) {
+    const user = req.user;
+
+    if (!user || !rolesPermitidos.includes(user.role)) {
+      return res.status(403).json({ mensaje: 'Acceso denegado. No tienes permiso para acceder a esta ruta' });
+    }
+
+    next();
+  };
+}
 
 module.exports = {
   verificarToken,

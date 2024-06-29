@@ -3,13 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
 
 const connectDB = require('./config/database');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const studentsRouter = require('./routes/students');
 
 var app = express();
+
+// Habilitar CORS
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,6 +30,7 @@ connectDB();
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/students', studentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
