@@ -1,0 +1,100 @@
+<!-- src/app/components/subject-management/subject-management.component.html -->
+<div class="container mt-5">
+ 
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="input-group w-50">
+        <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="searchText">
+        <button class="btn btn-primary" (click)="searchSubject()">Buscar</button>
+      </div>
+      <button class="btn btn-success" (click)="openCreateModal()">Crear una Materia</button>
+    </div>
+  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nro</th>
+          <th>Nombre</th>
+          <th>Categoria</th>
+          <th>Nivel</th>
+          <th>Codigo</th>
+          <th>horas</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subject of subjects">
+          <td>{{ subject.nro }}</td>
+          <td>{{ subject.name }}</td>
+          <td>{{ subject.category }}</td>
+          <td>{{ subject.level }}</td>
+          <td>{{ subject.code }}</td>
+          <td>{{ subject.hours }}</td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="viewSubject(subject._id)">Ver</button>
+            <button class="btn btn-warning btn-sm" (click)="openEditModal(subject)">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteSubject(subject._id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Modal para Crear/Editar Materia -->
+    <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" style="display: block;" *ngIf="showModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ isEditMode ? 'Editar Materia' : 'Crear Materia' }}</h5>
+            <button type="button" class="close" (click)="closeModal()">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="isEditMode ? updateSubject() : createSubject()">
+              <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="currentSubject.name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="category">Categoria</label>
+                <input type="text" class="form-control" id="category" [(ngModel)]="currentSubject.category" name="category" required>
+              </div>
+              <div class="form-group">
+                <label for="level">Nivel</label>
+                <input type="text" class="form-control" id="level" [(ngModel)]="currentSubject.level" name="level" required>
+              </div>
+              <div class="form-group">
+                <label for="code">Codigo</label>
+                <input type="text" class="form-control" id="code" [(ngModel)]="currentSubject.code" name="code" required>
+              </div>
+              <div class="form-group">
+                <label for="hours">Horas</label>
+                <input type="text" class="form-control" id="hours" [(ngModel)]="currentSubject.hours" name="hours" required>
+              </div>
+              <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Modal para Ver la Materia -->
+  <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showViewModal}" style="display: block;" *ngIf="showViewModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ver Materia</h5>
+          <button type="button" class="close" (click)="closeViewModal()">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Nro:</strong> {{ currentSubject.nro }}</p>
+          <p><strong>Nombre:</strong> {{ currentSubject.name }}</p>
+          <p><strong>Categoria:</strong> {{ currentSubject.category }}</p>
+          <p><strong>Nivel:</strong> {{ currentSubject.level }}</p>
+          <p><strong>Codigo:</strong> {{ currentSubject.code }}</p>
+          <p><strong>Horas:</strong> {{ currentSubject.hours }}</p>
+        </div>
+      </div>
+    </div>
+  </div>

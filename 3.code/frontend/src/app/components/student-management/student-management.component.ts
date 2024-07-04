@@ -10,6 +10,7 @@ import { StudentService } from 'src/app/services/student.service';
 export class StudentManagementComponent implements OnInit {
   students: any[] = [];
   searchText: string = '';
+  allStudents: any[] = [];
   showModal: boolean = false;
   isEditMode: boolean = false;
   currentStudent: any = { name: '', email: '' };
@@ -24,6 +25,7 @@ export class StudentManagementComponent implements OnInit {
     this.studentService.getStudents().subscribe(data => {
       //this.students = data;
       this.students = data.filter((student: { activo: any; }) => student.activo);
+      this.allStudents = data.filter((subject: { activo: any; }) => subject.activo);
     });
   }
 
@@ -44,7 +46,7 @@ export class StudentManagementComponent implements OnInit {
 
   searchStudent(): void {
     if (this.searchText) {
-      this.students = this.students.filter(student => 
+      this.students = this.allStudents.filter(student => 
         student.name.includes(this.searchText) ||
         student.apellido.includes(this.searchText) ||
         student.cedula.includes(this.searchText) ||
@@ -54,7 +56,8 @@ export class StudentManagementComponent implements OnInit {
         student.email.includes(this.searchText)
       );
     } else {
-      this.loadStudents();
+      //this.loadStudents();
+      this.students = [...this.allStudents];
     }
   }
 

@@ -35,6 +35,14 @@ const teacherSchema = new mongoose.Schema({
   qualification: {
     type: String,
     required: false
+  },
+  subject: {
+    type: String,
+    required: false
+  },
+  activo: {
+    type: Boolean,
+    default: true
   }
 });
 

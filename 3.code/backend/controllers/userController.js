@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const Student = require('../models/student');
+const Teacher = require('../models/teacher');
 
 async function userRegister(req, res) {
   try {
@@ -41,6 +42,20 @@ async function userRegister(req, res) {
           email
         });
         await newStudent.save();
+      }
+    }else if (role === 'teacher') {
+      const existTeacher = await Teacher.findOne({ email });
+      if (!existTeacher) {
+
+        const lastTeacher = await Teacher.findOne().sort({ nro: -1 });
+        const nro = lastTeacher ? lastTeacher.nro + 1 : 1;
+
+        const newTeacher = new Teacher({
+          nro,
+          name,
+          email
+        });
+        await newTeacher.save();
       }
     }
 

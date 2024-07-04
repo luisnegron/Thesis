@@ -9,13 +9,17 @@ import { TeacherHomeComponent } from './components/teacher-home/teacher-home.com
 import { AdminGuard } from './guards/admin.guards';
 import { AuthGuard } from './guards/auth.guard';
 import { StudentManagementComponent } from './components/student-management/student-management.component';
+import { TeacherManagementComponent } from './components/teacher-management/teacher-management.component';
+import { SubjectManagementComponent } from './components/subject-management/subject-management.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: { roles: ['administrator'] },
     children: [
-      { path: 'students', component: StudentManagementComponent }
+      { path: 'students', component: StudentManagementComponent },
+      { path: 'teachers', component: TeacherManagementComponent },
+      { path: 'subjects', component: SubjectManagementComponent }
     ]
   },
   { path: 'student-home', component: StudentHomeComponent, canActivate: [AuthGuard], data: { roles: ['student'] } },

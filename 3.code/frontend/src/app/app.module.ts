@@ -13,6 +13,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StudentHomeComponent } from './components/student-home/student-home.component';
 import { TeacherHomeComponent } from './components/teacher-home/teacher-home.component';
 import { StudentManagementComponent } from './components/student-management/student-management.component';
+import { TeacherManagementComponent } from './components/teacher-management/teacher-management.component';
+import { SubjectManagementComponent } from './components/subject-management/subject-management.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { StudentManagementComponent } from './components/student-management/stud
     DashboardComponent,
     StudentHomeComponent,
     TeacherHomeComponent,
-    StudentManagementComponent
+    StudentManagementComponent,
+    TeacherManagementComponent,
+    SubjectManagementComponent
   ],
   imports: [
     BrowserModule,

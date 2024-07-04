@@ -24,6 +24,16 @@
               Estudiantes
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link text-center" [routerLink]="['/dashboard/teachers']" (click)="setCurrentModule('Profesores')">
+              Profesores
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-center" [routerLink]="['/dashboard/subjects']" (click)="setCurrentModule('Materias')">
+              Materias
+            </a>
+          </li>
           <li class="nav-item" *ngFor="let module of modules">
             <a class="nav-link" [routerLink]="module.route" routerLinkActive="active" (click)="setCurrentModule(module.name)">
               {{ module.name }}
