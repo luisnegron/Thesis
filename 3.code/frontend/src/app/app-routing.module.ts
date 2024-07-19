@@ -11,15 +11,33 @@ import { AuthGuard } from './guards/auth.guard';
 import { StudentManagementComponent } from './components/student-management/student-management.component';
 import { TeacherManagementComponent } from './components/teacher-management/teacher-management.component';
 import { SubjectManagementComponent } from './components/subject-management/subject-management.component';
+import { SectionManagementComponent } from './components/section-management/section-management.component';
+import { AreaManagementComponent } from './components/area-management/area-management.component';
+import { IndicatorManagementComponent } from './components/indicator-management/indicator-management.component';
+import { QuestionManagementComponent } from './components/question-management/question-management.component';
+import { SurveyManagementComponent } from './components/survey-management/survey-management.component';
+import { EvaluationManagementComponent } from './components/evaluation-management/evaluation-management.component';
+import { ReportManagementComponent } from './components/report-management/report-management.component';
+import { ResultManagementComponent } from './components/result-management/result-management.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: { roles: ['administrator'] },
     children: [
+      { path: 'users', component: UserManagementComponent },
       { path: 'students', component: StudentManagementComponent },
       { path: 'teachers', component: TeacherManagementComponent },
-      { path: 'subjects', component: SubjectManagementComponent }
+      { path: 'subjects', component: SubjectManagementComponent },
+      { path: 'sections', component: SectionManagementComponent },
+      { path: 'areas', component: AreaManagementComponent },
+      { path: 'indicators', component: IndicatorManagementComponent },
+      { path: 'questions', component: QuestionManagementComponent },
+      { path: 'surveys', component: SurveyManagementComponent },
+      { path: 'evaluations', component: EvaluationManagementComponent },
+      { path: 'reports', component: ReportManagementComponent },
+      { path: 'results', component: ResultManagementComponent }
     ]
   },
   { path: 'student-home', component: StudentHomeComponent, canActivate: [AuthGuard], data: { roles: ['student'] } },

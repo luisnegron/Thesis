@@ -13,8 +13,11 @@ router.get('/', function(req, res, next) {
 router.post('/register', userController.userRegister);
 router.post('/login', userController.login);
 router.get('/profile', authMiddleware.verificarToken, userController.obtainProfile);
+//router.get('/', authMiddleware.verificarToken, authMiddleware.verificarRol(['administrator']), userController.getUsers);
 router.get('/list-users', authMiddleware.verificarToken, authMiddleware.verificarRol(['administrator']), userController.obtainUsers);
 router.delete('/drop/:id', authMiddleware.verificarToken, authMiddleware.verificarRol(['administrator']), userController.dropUser);
 router.put('/change-role/:id', authMiddleware.verificarToken, authMiddleware.verificarRol(['administrator']), userController.changeRole);
+router.put('/:id', authMiddleware.verificarToken, authMiddleware.verificarRol(['administrator']), userController.updateUser);
+router.put('/deactivate/:id', authMiddleware.verificarToken, authMiddleware.verificarRol(['administrator']), userController.deactivateUser);
 
 module.exports = router;

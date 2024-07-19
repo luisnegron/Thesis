@@ -1,0 +1,94 @@
+<div class="container mt-5">
+    <h2>Gestión de Encuestas</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="input-group w-50">
+        <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="searchText">
+        <button class="btn btn-primary" (click)="searchSurvey()">Buscar</button>
+      </div>
+      <button class="btn btn-success" (click)="openCreateModal()">Crear Encuesta</button>
+    </div>
+  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Código</th>
+          <th>Tipo</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Periodo</th>
+          <th>Instrucciones</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let survey of surveys">
+          <td>{{ survey.title }}</td>
+          <td>{{ survey.code }}</td>
+          <td>{{ survey.type }}</td>
+          <td>{{ survey.date | date }}</td>
+          <td>{{ survey.status }}</td>
+          <td>{{ survey.period }}</td>
+          <td>{{ survey.instructions }}</td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="viewSurvey(survey._id)">Ver</button>
+            <button class="btn btn-warning btn-sm" (click)="openEditModal(survey)">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteSurvey(survey._id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Modal para Crear/Editar Encuesta -->
+    <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" style="display: block;" *ngIf="showModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ isEditMode ? 'Editar Encuesta' : 'Crear Encuesta' }}</h5>
+            <button type="button" class="close" (click)="closeModal()">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="isEditMode ? updateSurvey() : createSurvey()">
+              <div class="form-group">
+                <label for="title">Título</label>
+                <input type="text" class="form-control" id="title" [(ngModel)]="currentSurvey.title" name="title" required>
+              </div>
+              <div class="form-group">
+                <label for="code">Código</label>
+                <input type="text" class="form-control" id="code" [(ngModel)]="currentSurvey.code" name="code" required>
+              </div>
+              <div class="form-group">
+                <label for="type">Tipo</label>
+                <select class="form-control" id="type" [(ngModel)]="currentSurvey.type" name="type" required>
+                  <option value="Encuesta">Encuesta</option>
+                  <option value="Cuestionario">Cuestionario</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="date">Fecha</label>
+                <input type="date" class="form-control" id="date" [(ngModel)]="currentSurvey.date" name="date" required>
+              </div>
+              <div class="form-group">
+                <label for="status">Estado</label>
+                <select class="form-control" id="status" [(ngModel)]="currentSurvey.status" name="status" required>
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="period">Periodo</label>
+                <input type="text" class="form-control" id="period" [(ngModel)]="currentSurvey.period" name="period" required>
+              </div>
+              <div class="form-group">
+                <label for="instructions">Instrucciones</label>
+                <textarea class="form-control" id="instructions" [(ngModel)]="currentSurvey.instructions" name="instructions"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

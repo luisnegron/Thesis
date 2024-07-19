@@ -10,6 +10,8 @@ import { SubjectService } from 'src/app/services/subject.service';
 export class SubjectManagementComponent implements OnInit {
   subjects: any[] = [];
   currentSubject: any = { name: '', code: '' };
+  grades: string[] = ['1ro', '2do', '3ro', '4to', '5to', '6to', '7mo', '8vo', '9no', '10mo' ];
+  categories: string[] = ['Basica', 'Compleja', 'Media', 'Tecnica'];
   allSubjects: any[] = [];
   searchText: string = '';
   showModal: boolean = false;

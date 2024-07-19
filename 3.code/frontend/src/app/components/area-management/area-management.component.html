@@ -1,0 +1,80 @@
+<div class="container mt-5">
+    <h2>Gestión de Áreas</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="input-group w-50">
+        <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="searchText">
+        <button class="btn btn-primary" (click)="searchArea()">Buscar</button>
+      </div>
+      <button class="btn btn-success" (click)="openCreateModal()">Crear Área</button>
+    </div>
+  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let area of areas">
+          <td>{{ area.id }}</td>
+          <td>{{ area.name }}</td>
+          <td>{{ area.description }}</td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="viewArea(area.id)">Ver</button>
+            <button class="btn btn-warning btn-sm" (click)="openEditModal(area)">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteArea(area.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Modal para Crear/Editar Área -->
+    <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" style="display: block;" *ngIf="showModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ isEditMode ? 'Editar Área' : 'Crear Área' }}</h5>
+            <button type="button" class="close" (click)="closeModal()">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="isEditMode ? updateArea() : createArea()">
+              <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="selectedArea.name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="description">Descripción</label>
+                <input type="text" class="form-control" id="description" [(ngModel)]="selectedArea.description" name="description" required>
+              </div>
+              <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Modal para Ver Área -->
+    <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showViewModal}" style="display: block;" *ngIf="showViewModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Ver Área</h5>
+            <button type="button" class="close" (click)="closeViewModal()">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><strong>ID:</strong> {{ selectedArea.id }}</p>
+            <p><strong>Nombre:</strong> {{ selectedArea.name }}</p>
+            <p><strong>Descripción:</strong> {{ selectedArea.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

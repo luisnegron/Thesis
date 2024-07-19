@@ -1,0 +1,155 @@
+<div class="container mt-5">
+  <h2>Gestión de Paralelos</h2>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="input-group w-50">
+      <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="searchText">
+      <button class="btn btn-primary" (click)="searchSection()">Buscar</button>
+    </div>
+    <button class="btn btn-success" (click)="openCreateModal()">Crear Paralelo</button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nro</th>
+        <th>Profesor</th>
+        <th>Materia</th>
+        <th>Periodo</th>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let section of sections">
+        <td>{{ section.nro }}</td>
+        <td>{{ section.teacher.name }}</td>
+        <td>{{ section.subject.name }}</td>
+        <td>{{ section.period }}</td>
+        <td>{{ section.code }}</td>
+        <td>{{ section.name }}</td>
+        <td>
+          <button class="btn btn-info btn-sm" (click)="viewSection(section._id)">Ver</button>
+          <button class="btn btn-warning btn-sm" (click)="openEditModal(section)">Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteSection(section._id)">Eliminar</button>
+          <button class="btn btn-secondary btn-sm" (click)="viewSectionStudents(section._id)">Estudiantes</button>
+          <button class="btn btn-success btn-sm" (click)="openAddStudentsModal(section)">Agregar Estudiantes</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal para Crear/Editar Sección -->
+  <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" style="display: block;" *ngIf="showModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ isEditMode ? 'Editar Paralelo' : 'Crear Paralelo' }}</h5>
+          <button type="button" class="close" (click)="closeModal()">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="isEditMode ? updateSection() : createSection()">
+            <div class="form-group">
+              <label for="teacher">Profesor</label>
+              <select class="form-control" id="teacher" [(ngModel)]="currentSection.teacher" name="teacher" required>
+                <option *ngFor="let teacher of teachers" [value]="teacher._id">{{ teacher.name }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="subject">Materia</label>
+              <select class="form-control" id="subject" [(ngModel)]="currentSection.subject" name="subject" required>
+                <option *ngFor="let subject of subjects" [value]="subject._id">{{ subject.name }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="period">Periodo</label>
+              <select class="form-control" id="period" [(ngModel)]="currentSection.period" name="period" required>
+                <option *ngFor="let period of periods" [value]="period">{{ period }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="code">Código</label>
+              <input type="text" class="form-control" id="code" [(ngModel)]="currentSection.code" name="code" required>
+            </div>
+            <div class="form-group">
+              <label for="name">Nombre</label>
+              <input type="text" class="form-control" id="name" [(ngModel)]="currentSection.name" name="name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Ver Sección -->
+  <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showViewModal}" style="display: block;" *ngIf="showViewModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ver Paralelo</h5>
+          <button type="button" class="close" (click)="closeViewModal()">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Nro:</strong> {{ currentSection.nro }}</p>
+          <p><strong>Profesor:</strong> {{ currentSection.teacher.name }}</p>
+          <p><strong>Materia:</strong> {{ currentSection.subject.name }}</p>
+          <p><strong>Periodo:</strong> {{ currentSection.period }}</p>
+          <p><strong>Código:</strong> {{ currentSection.code }}</p>
+          <p><strong>Nombre:</strong> {{ currentSection.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para Ver Estudiantes -->
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showStudentsModal}" style="display: block;" *ngIf="showStudentsModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Estudiantes del Paralelo</h5>
+        <button type="button" class="close" (click)="closeStudentsModal()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li *ngFor="let student of students">
+            {{ student.name }} ({{ student.email }})
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Agregar Estudiantes -->
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showAddStudentsModal}" style="display: block;" *ngIf="showAddStudentsModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar Estudiantes al Paralelo</h5>
+        <button type="button" class="close" (click)="closeAddStudentsModal()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="addStudentsToSection()">
+          <div class="form-group">
+            <label for="students">Seleccionar Estudiantes</label>
+            <select multiple class="form-control" id="students" [(ngModel)]="selectedStudents" name="students">
+              <option *ngFor="let student of students" [value]="student._id">{{ student.name }}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

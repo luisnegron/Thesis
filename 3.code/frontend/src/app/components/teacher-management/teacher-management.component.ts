@@ -1,6 +1,7 @@
 // src/app/components/teacher-management/teacher-management.component.ts
 import { Component, OnInit } from '@angular/core';
 import { TeacherService } from 'src/app/services/teacher.service';
+import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
   selector: 'app-teacher-management',
@@ -9,16 +10,18 @@ import { TeacherService } from 'src/app/services/teacher.service';
 })
 export class TeacherManagementComponent implements OnInit {
   teachers: any[] = [];
+  subjects: any[] = [];
   searchText: string = '';
   allTeachers: any[] = [];
   showModal: boolean = false;
   isEditMode: boolean = false;
-  currentTeacher: any = { name: '', email: '' };
+  currentTeacher: any = { name: '', email: '', subject: '' };
 
-  constructor(private teacherService: TeacherService) { }
+  constructor(private teacherService: TeacherService, private subjectService: SubjectService) { }
 
   ngOnInit(): void {
     this.loadTeachers();
+    this.loadSubjects();
   }
 
   loadTeachers(): void {
@@ -29,11 +32,21 @@ export class TeacherManagementComponent implements OnInit {
     });
   }
 
+  loadSubjects(): void {
+    this.subjectService.getSubjects().subscribe(data => {
+      this.subjects = data.filter((subject: { activo: any; }) => subject.activo);
+    }, error => {
+      console.error('Error loading subjects:', error);
+    });
+  }
+
   showViewModal: boolean = false;
 
   viewTeacher(id: string): void {
     this.teacherService.getTeacherById(id).subscribe(data => {
       this.currentTeacher = data;
+      const subject = this.subjects.find(sub => sub._id === this.currentTeacher.subject);
+      this.currentTeacher.subjectName = subject ? subject.name : 'N/A';
       this.showViewModal = true;
     }, error => {
       console.error('Error al obtener profesor:', error);

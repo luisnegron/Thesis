@@ -19,6 +19,13 @@
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky sidebar-sticky">
         <ul class="nav flex-column">
+
+          <!--<li class="nav-item">
+            <a class="nav-link text-center" [routerLink]="['/dashboard/users']" (click)="setCurrentModule('Usuarios')">
+              Usuarios
+            </a>
+          </li>-->
+
           <li class="nav-item">
             <a class="nav-link text-center" [routerLink]="['/dashboard/students']" (click)="setCurrentModule('Estudiantes')">
               Estudiantes
@@ -34,11 +41,55 @@
               Materias
             </a>
           </li>
-          <li class="nav-item" *ngFor="let module of modules">
-            <a class="nav-link" [routerLink]="module.route" routerLinkActive="active" (click)="setCurrentModule(module.name)">
-              {{ module.name }}
+          <li class="nav-item">
+            <a class="nav-link text-center" [routerLink]="['/dashboard/sections']" (click)="setCurrentModule('Paralelos')">
+              Paralelos
             </a>
           </li>
+
+          <!-- Nuevo enlace para Áreas -->
+          <li class="nav-item">
+            <a class="nav-link text-center" [routerLink]="['/dashboard/areas']" (click)="setCurrentModule('Áreas de Evaluación')">
+              Áreas de Evaluación
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link text-center" [routerLink]="['/dashboard/indicators']" (click)="setCurrentModule('Indicadores')">
+              Indicadores
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-center" [routerLink]="['/dashboard/questions']" (click)="setCurrentModule('Preguntas')">
+              Preguntas
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-center" [routerLink]="['/dashboard/surveys']" (click)="setCurrentModule('Encuestas')">
+              Encuestas
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-center" [routerLink]="['/dashboard/evaluations']" (click)="setCurrentModule('Evaluaciones')">
+              Evaluaciones
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-center" [routerLink]="['/dashboard/reports']" (click)="setCurrentModule('Reportes')">
+              Reportes
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-center" [routerLink]="['/dashboard/results']" (click)="setCurrentModule('Resultados')">
+              Resultados
+            </a>
+          </li>
+
         </ul>
       </div>
     </nav>

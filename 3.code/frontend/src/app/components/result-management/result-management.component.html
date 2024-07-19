@@ -1,0 +1,18 @@
+<div class="container mt-5">
+    <h2>Gestión de Resultados</h2>
+  
+    <div class="form-group">
+      <label for="period">Período Académico</label>
+      <input type="text" class="form-control" id="period" [(ngModel)]="period" placeholder="Ingrese Período Académico">
+    </div>
+    <button class="btn btn-primary" (click)="loadResults()">Cargar Resultados</button>
+  
+    <div *ngIf="result">
+      <h3>Resultados por Período</h3>
+      <div *ngFor="let result of result.results">
+        <h4>Profesor: {{ result.teacherId.name }}</h4>
+        <p><strong>Detalles del Reporte:</strong></p>
+        <pre>{{ result.reportDetails | json }}</pre>
+      </div>
+    </div>
+  </div>

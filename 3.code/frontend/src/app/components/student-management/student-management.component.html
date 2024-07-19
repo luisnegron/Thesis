@@ -73,8 +73,10 @@
               <input type="email" class="form-control" id="email" [(ngModel)]="currentStudent.email" name="email" required>
             </div>
             <div class="form-group">
-              <label for="grado">Grado</label>
-              <input type="text" class="form-control" id="grado" [(ngModel)]="currentStudent.grado" name="grado" required>
+              <label for="grado">Nivel</label>
+              <select class="form-control" id="grado" [(ngModel)]="currentStudent.grado" name="grado" required>
+                <option *ngFor="let grade of grades" [value]="grade">{{ grade }}</option>
+              </select>
             </div>
             <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
           </form>

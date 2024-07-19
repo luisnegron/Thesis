@@ -14,6 +14,7 @@ export class StudentManagementComponent implements OnInit {
   showModal: boolean = false;
   isEditMode: boolean = false;
   currentStudent: any = { name: '', email: '' };
+  grades: string[] = ['1ro', '2do', '3ro', '4to', '5to', '6to', '7mo', '8vo', '9no', '10mo' ];
 
   constructor(private studentService: StudentService) { }
 

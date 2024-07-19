@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent {
   modules = [
-    { name: 'Gestión de Usuarios', route: '/users' },
+    //{ name: 'Gestión de Usuarios', route: '/users' },
     { name: 'Gestión de Estudiantes', route: '/students' },
     { name: 'Gestión de Profesores', route: '/teachers' },
     { name: 'Gestión de Materias', route: '/subjects' },
@@ -24,7 +24,7 @@ export class DashboardComponent {
     { name: 'Gestión de Resultados', route: '/results' }
   ];
 
-  currentModule: string = 'Usuarios';
+  currentModule: string = 'Estudiantes';
 
   constructor(private router: Router) { }
 

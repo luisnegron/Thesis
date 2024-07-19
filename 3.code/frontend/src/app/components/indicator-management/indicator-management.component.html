@@ -1,0 +1,64 @@
+<!-- components/indicator-management/indicator-management.component.html -->
+<div class="container mt-5">
+    <h2>Gestión de Indicadores</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="input-group w-50">
+        <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="searchText">
+        <button class="btn btn-primary" (click)="searchIndicator()">Buscar</button>
+      </div>
+      <button class="btn btn-success" (click)="openCreateModal()">Crear Indicador</button>
+    </div>
+  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Valor</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let indicator of indicators">
+          <td>{{ indicator.name }}</td>
+          <td>{{ indicator.description }}</td>
+          <td>{{ indicator.value }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="openEditModal(indicator)">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteIndicator(indicator._id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Modal para Crear/Editar Indicador -->
+    <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" style="display: block;" *ngIf="showModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ isEditMode ? 'Editar Indicador' : 'Crear Indicador' }}</h5>
+            <button type="button" class="close" (click)="closeModal()">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="isEditMode ? updateIndicator() : createIndicator()">
+              <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="selectedIndicator.name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="description">Descripción</label>
+                <input type="text" class="form-control" id="description" [(ngModel)]="selectedIndicator.description" name="description" required>
+              </div>
+              <div class="form-group">
+                <label for="value">Valor</label>
+                <input type="number" class="form-control" id="value" [(ngModel)]="selectedIndicator.value" name="value" required>
+              </div>
+              <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -56,11 +56,15 @@
               </div>
               <div class="form-group">
                 <label for="category">Categoria</label>
-                <input type="text" class="form-control" id="category" [(ngModel)]="currentSubject.category" name="category" required>
+                <select class="form-control" id="category" [(ngModel)]="currentSubject.category" name="category" required>
+                  <option *ngFor="let categori of categories" [value]="categori">{{ categori }}</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="level">Nivel</label>
-                <input type="text" class="form-control" id="level" [(ngModel)]="currentSubject.level" name="level" required>
+                <select class="form-control" id="level" [(ngModel)]="currentSubject.level" name="level" required>
+                  <option *ngFor="let grade of grades" [value]="grade">{{ grade }}</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="code">Codigo</label>

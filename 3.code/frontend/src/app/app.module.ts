@@ -15,6 +15,15 @@ import { TeacherHomeComponent } from './components/teacher-home/teacher-home.com
 import { StudentManagementComponent } from './components/student-management/student-management.component';
 import { TeacherManagementComponent } from './components/teacher-management/teacher-management.component';
 import { SubjectManagementComponent } from './components/subject-management/subject-management.component';
+import { SectionManagementComponent } from './components/section-management/section-management.component';
+import { AreaManagementComponent } from './components/area-management/area-management.component';
+import { IndicatorManagementComponent } from './components/indicator-management/indicator-management.component';
+import { QuestionManagementComponent } from './components/question-management/question-management.component';
+import { SurveyManagementComponent } from './components/survey-management/survey-management.component';
+import { EvaluationManagementComponent } from './components/evaluation-management/evaluation-management.component';
+import { ReportManagementComponent } from './components/report-management/report-management.component';
+import { ResultManagementComponent } from './components/result-management/result-management.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +36,16 @@ import { SubjectManagementComponent } from './components/subject-management/subj
     TeacherHomeComponent,
     StudentManagementComponent,
     TeacherManagementComponent,
-    SubjectManagementComponent
+    SubjectManagementComponent,
+    SectionManagementComponent,
+    AreaManagementComponent,
+    IndicatorManagementComponent,
+    QuestionManagementComponent,
+    SurveyManagementComponent,
+    EvaluationManagementComponent,
+    ReportManagementComponent,
+    ResultManagementComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,

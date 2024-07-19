@@ -41,4 +41,26 @@ export class AuthService {
     }
     return null;
   }
+
+  getUsers(): Observable<any[]> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<any[]>(`${this.baseUrl}/list-users`, { headers });
+  }
+
+  updateUser(id: string, user: any): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.put<any>(`${this.baseUrl}/${id}`, user, { headers });
+  }
+
+  deactivateUser(id: string): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.put<any>(`${this.baseUrl}/deactivate/${id}`, {}, { headers });
+  }
+
+  private createAuthorizationHeader(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
 }
